@@ -5,12 +5,19 @@
  */
 package arbol_huffman;
 
+import ec.edu.espol.constants.Constantes;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -109,9 +116,32 @@ public class Util {
         return decimal;
     }
     
-   /*public int binaryToDecimal(String binary, double exp, int pos){
-        if(pos == 0)
-            return (int) (Double.valueOf(binary.charAt(pos))*Math.pow(2,exp));
-        return Integer.valueOf(binary.charAt(pos))*Math.pow(2,exp) + binaryToDecimal(binary, 0, );Math.p
-    }*/
+    public static void guardarTexto (String nombreArchivo, String texto, HashMap<String,String> mapa){
+        try(BufferedWriter writerText = new BufferedWriter(new FileWriter(Constantes.RUTAFILES + nombreArchivo + ".txt"));
+            BufferedWriter writerCompress = new BufferedWriter(new FileWriter(Constantes.RUTAFILES + nombreArchivo + "_compress.txt"))){
+            writerText.write(texto);
+            for(Map.Entry<String, String> code:  mapa.entrySet()){
+                writerCompress.write(code.getKey() + "=" + code.getValue());
+                writerCompress.newLine();
+            } 
+            
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    public static HashMap<String,String> leerMapa (String nombreArchivo){
+        HashMap<String,String> codes = new HashMap<>();
+        try(BufferedReader br = new BufferedReader(new FileReader(Constantes.RUTAFILES + nombreArchivo))){
+            String line = br.readLine();
+            while(line != null){
+                String[] data = line.split("=");
+                codes.put(data[0], data[1]);
+                line = br.readLine();
+            } 
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return codes;
+    }
 }
