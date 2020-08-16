@@ -6,13 +6,23 @@
 package ec.edu.espol.main;
 
 import arbol_huffman.Util;
+import ec.edu.espol.UI.PantallaPrincipal;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 /**
  *
  * @author micharce
  */
-public class Main {
-    public static void main(String[] args) {    
+public class Main extends Application{
+    public static void main(String[] args) {
+        launch(args);
+    }
+    @Override
+    public void start(Stage stage){
+        PantallaPrincipal pp = new PantallaPrincipal(stage);
+    }
+    /*public static void main(String[] args) {    
         String txt = Util.leerTexto("./src/arbol_huffman/texto.txt");
         System.out.println(Util.calcularFrecuencias(txt));
         String txt2 = Util.leerTexto("./src/arbol_huffman/prueba.txt");
@@ -29,5 +39,7 @@ public class Main {
         String binary2 = Util.hexadecimalBinario(hex);
         System.out.println(binary2);
         System.out.println(binary.equals(binary2));
-    }
+    }*/
+      
+        
 }
