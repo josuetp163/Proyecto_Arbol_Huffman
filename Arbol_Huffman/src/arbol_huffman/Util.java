@@ -79,19 +79,8 @@ public class Util {
             if(!s.equals("-")){
                 int decimal = Integer.parseInt(s,16);
                 String bin = Integer.toBinaryString(decimal);
-                switch (bin.length()) {
-                    case 1:
-                        bin = "000" + bin;
-                        break;
-                    case 2:
-                        bin = "00" + bin;
-                        break;
-                    case 3:
-                        bin = "0" + bin;
-                        break;
-                    default:
-                        break;
-                }
+                while(bin.length()<4)
+                    bin = "0" + bin;
                 sb.append(bin);
             }else{
                 sb.deleteCharAt(sb.length()-1);

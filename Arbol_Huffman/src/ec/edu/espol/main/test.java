@@ -7,6 +7,7 @@ package ec.edu.espol.main;
 
 import arbol_huffman.ArbolHuffman;
 import arbol_huffman.Util;
+import ec.edu.espol.constants.Constantes;
 import java.util.HashMap;
 
 /**
@@ -20,18 +21,14 @@ public class test {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        String textFile = "dffdfdfdfdllauuuetqyepppaaabdgqge";
+        String textFile = Util.leerTexto(Constantes.RUTAFILES + "prueba.txt");
                 HashMap<String, Integer> frecuencias = Util.calcularFrecuencias(textFile);
-                System.out.println(frecuencias);
                 ArbolHuffman ah = new ArbolHuffman();
                 ah.calcularArbol(frecuencias);
-                HashMap<String, String> codes = ah.calcularCodigos();
-                System.out.println(codes);
-                String binary = ArbolHuffman.codificar(textFile, codes);
-                System.out.println(binary);
+                String binary = ArbolHuffman.codificar(textFile, ah.calcularCodigos());
                 String hex = Util.binarioHexadecimal(binary);
-                System.out.println(hex);
-                //Util.guardarTexto("test.txt", hex, ah.calcularCodigos());
+                Util.guardarTexto("copy_prueba.txt", hex, ah.calcularCodigos());
+
     }
     
 }
