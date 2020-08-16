@@ -57,20 +57,19 @@ public class Util {
     }
     
     public static String binarioHexadecimal(String binario){
-        int residuo = binario.length() % 4;
-        String zeros = "0";
+        int count = 0;
+        while(binario.length() % 4 > 0){
+            binario = binario + "0";
+            count++;
+        }
+        
         StringBuilder sb = new StringBuilder();
-        if(residuo != 0){
-            zeros = zeros.repeat(residuo);
-            binario = binario + zeros;
-        }else
-            zeros = "";
         for(int i = 0; i<binario.length(); i = i+4){
             String bin = binario.substring(i, i+4);
             int decimal = binaryToDecimal(bin);
             sb.append(Integer.toHexString(decimal));
         }
-        return sb.toString() + "-".repeat(zeros.length());    
+        return sb.toString() + "-".repeat(count);    
     }
     
     public static String hexadecimalBinario(String hexadecimal){
@@ -117,8 +116,8 @@ public class Util {
     }
     
     public static void guardarTexto (String nombreArchivo, String texto, HashMap<String,String> mapa){
-        try(BufferedWriter writerText = new BufferedWriter(new FileWriter(Constantes.RUTAFILES + nombreArchivo + ".txt"));
-            BufferedWriter writerCompress = new BufferedWriter(new FileWriter(Constantes.RUTAFILES + nombreArchivo + "_compress.txt"))){
+        try(BufferedWriter writerText = new BufferedWriter(new FileWriter(Constantes.RUTAFILES + nombreArchivo));
+            BufferedWriter writerCompress = new BufferedWriter(new FileWriter(Constantes.RUTAFILES + nombreArchivo.replaceFirst(".txt", "") + "_compress.txt"))){
             writerText.write(texto);
             for(Map.Entry<String, String> code:  mapa.entrySet()){
                 writerCompress.write(code.getKey() + "=" + code.getValue());
