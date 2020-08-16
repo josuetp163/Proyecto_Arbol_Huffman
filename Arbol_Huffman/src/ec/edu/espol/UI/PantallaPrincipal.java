@@ -5,7 +5,11 @@
  */
 package ec.edu.espol.UI;
 
+import arbol_huffman.ArbolHuffman;
+import arbol_huffman.Util;
+import ec.edu.espol.constants.Constantes;
 import java.io.File;
+import java.util.HashMap;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -53,10 +57,21 @@ public class PantallaPrincipal {
             File selectedFile = fc.showOpenDialog(stage);
             if (selectedFile != null) {
                 lb.setText("File selected: " + selectedFile.getName());
+                compressionProcess(selectedFile);
             }
             else {
                 lb.setText("File selection cancelled.");
             }
         });
+    }
+    
+    private static void compressionProcess(File nameFile){
+        String textFile = Util.leerTexto(nameFile.getPath());
+        HashMap<String, Integer> frecuencias = Util.calcularFrecuencias(textFile);
+        ArbolHuffman ah = new ArbolHuffman();
+        ah.calcularArbol(frecuencias);
+        String codeBinary = ArbolHuffman.codificar(textFile, ah.calcularCodigos());
+        String codeHex = Util.binarioHexadecimal(codeBinary);
+        Util.guardarTexto(nameFile.getName(), codeHex, ah.calcularCodigos());
     }
 }

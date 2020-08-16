@@ -5,8 +5,6 @@
  */
 package ec.edu.espol.main;
 
-import arbol_huffman.ArbolHuffman;
-import arbol_huffman.Util;
 import ec.edu.espol.UI.PantallaPrincipal;
 import javafx.application.Application;
 import javafx.stage.Stage;
