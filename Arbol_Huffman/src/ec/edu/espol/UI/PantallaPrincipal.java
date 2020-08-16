@@ -20,18 +20,18 @@ import javafx.stage.Stage;
  * @author micharce
  */
 public class PantallaPrincipal {
-    Stage mainStage;
     Scene mainScene;
     BorderPane panePrincipal;
     Button comprimir;
     Button descomprimir;
     
     public PantallaPrincipal(Stage stage) {
-        crearEstructura();
-        accionesBotones();
+        stage = new Stage();
+        crearEstructura(stage);
+        accionesBotones(stage);
     }
     
-    private void crearEstructura() {
+    private void crearEstructura(Stage mainStage) {
         panePrincipal = new BorderPane();
         mainScene = new Scene(panePrincipal,400,400);
         mainStage.setScene(mainScene);
@@ -43,13 +43,14 @@ public class PantallaPrincipal {
         mainStage.show();
     }
     
-    private void accionesBotones() {
+    private void accionesBotones(Stage stage) {
         comprimir.setOnAction(e -> {
             Label lb = new Label();
+            VBox vb = new VBox(); vb.getChildren().add(lb);
+            panePrincipal.setBottom(vb);
             FileChooser fc = new FileChooser();
             fc.setTitle("Seleccionar un archivo");
-            fc.getExtensionFilters().addAll(new ExtensionFilter("TXT files"));
-            File selectedFile = fc.showOpenDialog(mainStage);
+            File selectedFile = fc.showOpenDialog(stage);
             if (selectedFile != null) {
                 lb.setText("File selected: " + selectedFile.getName());
             }
