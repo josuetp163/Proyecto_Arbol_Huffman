@@ -96,11 +96,19 @@ public class ArbolHuffman {
         StringBuilder retorno = new StringBuilder();
         String tmp = "";
         String[] codigos = texto.split("");
+        Set<String> llaves = mapa.keySet();
         
         for(String i : codigos) {
             tmp = tmp + i;
-            if (mapa.containsKey(tmp)) {
-                retorno.append(mapa.get(tmp));
+            if (mapa.containsValue(tmp)) {
+                Iterator<String> it = llaves.iterator();
+                while (!tmp.equals("")) {
+                    String llave = it.next();
+                    if (mapa.get(llave).equals(tmp)) {
+                        retorno.append(llave);
+                        tmp = "";
+                    }
+                }
             }
         }
         return retorno.toString();

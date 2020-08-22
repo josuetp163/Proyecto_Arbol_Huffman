@@ -105,16 +105,18 @@ public class Util {
     }
     
     public static void guardarTexto (String nombreArchivo, String texto, HashMap<String,String> mapa){
-        try(BufferedWriter writerText = new BufferedWriter(new FileWriter(Constantes.RUTAFILES + nombreArchivo));
-            BufferedWriter writerCompress = new BufferedWriter(new FileWriter(Constantes.RUTAFILES + nombreArchivo.replaceFirst(".txt", "") + "_compress.txt"))){
-            writerText.write(texto);
-            for(Map.Entry<String, String> code:  mapa.entrySet()){
-                writerCompress.write(code.getKey() + "=" + code.getValue());
-                writerCompress.newLine();
-            } 
-            
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+        if (nombreArchivo != null && texto != null && mapa != null) { 
+            try(BufferedWriter writerText = new BufferedWriter(new FileWriter(Constantes.RUTAFILES + nombreArchivo));
+                BufferedWriter writerCompress = new BufferedWriter(new FileWriter(Constantes.RUTAFILES + nombreArchivo.replaceFirst(".txt", "") + "_compress.txt"))){
+                writerText.write(texto);
+                for(Map.Entry<String, String> code:  mapa.entrySet()){
+                    writerCompress.write(code.getKey() + "=" + code.getValue());
+                    writerCompress.newLine();
+                } 
+
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
     
@@ -126,10 +128,11 @@ public class Util {
                 String[] data = line.split("=");
                 codes.put(data[0], data[1]);
                 line = br.readLine();
-            } 
+            }
+        return codes; 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-        return codes;
+        return null;
     }
 }
