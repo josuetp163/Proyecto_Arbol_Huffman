@@ -6,6 +6,7 @@
 package ec.edu.espol.main;
 
 import ec.edu.espol.UI.PantallaPrincipal;
+import ec.edu.espol.constants.Constantes;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -21,5 +22,10 @@ public class Main extends Application{
     @Override
     public void start(Stage stage){
         PantallaPrincipal pp = new PantallaPrincipal(stage);
+    }
+    
+    @Override
+    public void init(){
+        setUserAgentStylesheet(Constantes.RUTASTYLE);
     }
 }

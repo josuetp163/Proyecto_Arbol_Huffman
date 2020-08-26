@@ -12,6 +12,7 @@ import ec.edu.espol.constants.Constantes;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -48,6 +49,8 @@ public class PantallaPrincipal {
         VBox vb = new VBox();
         vb.getChildren().addAll(comprimir, descomprimir);
         panePrincipal.setCenter(vb);
+        vb.setAlignment(Pos.CENTER);
+        mainStage.setTitle("ARBOL HUFFMAN");
         mainStage.show();
     }
 
