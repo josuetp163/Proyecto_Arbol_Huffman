@@ -5,12 +5,8 @@
  */
 package ec.edu.espol.UI;
 
-import arbol_huffman.ArbolHuffman;
 import arbol_huffman.Operaciones;
-import arbol_huffman.Util;
-import ec.edu.espol.constants.Constantes;
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,7 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 /**
@@ -34,7 +29,6 @@ public class PantallaPrincipal {
     Button descomprimir;
 
     public PantallaPrincipal(Stage stage) {
-        stage = new Stage();
         crearEstructura(stage);
         accionComprimir(stage);
         accionDescomprimir(stage);

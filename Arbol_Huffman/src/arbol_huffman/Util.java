@@ -8,15 +8,11 @@ package arbol_huffman;
 import ec.edu.espol.constants.Constantes;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
@@ -26,8 +22,7 @@ import java.util.logging.Logger;
  */
 public class Util {
     public static String leerTexto(String nombreArchivo){
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
+        try(BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))){
             StringBuilder txt   = new StringBuilder();
             String line = br.readLine();
             while(line!=null){
@@ -36,7 +31,7 @@ public class Util {
             }
             return txt.toString();
         }catch(Exception e){
-        System.out.println(e.getMessage());
+        Logger.getLogger(e.getMessage());
         }
         return null;
     }
@@ -115,7 +110,7 @@ public class Util {
                 } 
 
             } catch (IOException ex) {
-                System.out.println(ex.getMessage());
+                Logger.getLogger(ex.getMessage());
             }
         }
     }
@@ -131,7 +126,7 @@ public class Util {
             }
         return codes; 
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            Logger.getLogger(ex.getMessage());
         }
         return null;
     }
