@@ -10,7 +10,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -43,12 +42,12 @@ public class Operaciones {
         if (file == null || mapFile == null) {
             return false;
         }
-        String mapName = mapFile.getName();
-        String fileName = file.getName();
-        if (mapName.contains("_compress.txt")) {
-            return crearNuevoTXT(fileName, mapName);
-        } else if (fileName.contains("_compress.txt")) {
-            return crearNuevoTXT(mapName, fileName);
+        String file1 = mapFile.getName();
+        String file2 = file.getName();
+        if (file1.contains("_compress.txt")) {
+            return crearNuevoTXT(file2, file1);
+        } else if (file2.contains("_compress.txt")) {
+            return crearNuevoTXT(file1, file2);
         } else {
             return false;
         }
