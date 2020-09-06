@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ec.edu.espol.UI;
+package ec.edu.espol.ui;
 
 import arbol_huffman.Operaciones;
 import java.io.File;
@@ -76,6 +76,7 @@ public class PantallaPrincipal {
             fc.setTitle("Seleccionar un archivo");
             List<File> selectedFiles = fc.showOpenMultipleDialog(stage);
             if (selectedFiles != null) {
+                if (selectedFiles.size() > 2) lb.setText("Escoja solo dos archivos");
                 Operaciones.decompressionProcess(selectedFiles.get(0), selectedFiles.get(1));
                 lb.setText("Descomprimido con éxito: " + selectedFiles.get(0) + ", " + selectedFiles.get(1));
             } else {

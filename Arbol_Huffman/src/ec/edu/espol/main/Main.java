@@ -5,7 +5,7 @@
  */
 package ec.edu.espol.main;
 
-import ec.edu.espol.UI.PantallaPrincipal;
+import ec.edu.espol.ui.PantallaPrincipal;
 import ec.edu.espol.constants.Constantes;
 import javafx.application.Application;
 import javafx.stage.Stage;

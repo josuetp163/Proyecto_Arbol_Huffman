@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -18,6 +19,9 @@ import java.util.HashMap;
  */
 public class Operaciones {
 
+    private Operaciones(){
+    }
+    
     public static boolean compressionProcess(File nameFile) {
         if (nameFile == null) {
             return false;
@@ -26,7 +30,7 @@ public class Operaciones {
         if (textFile == null) {
             return false;
         }
-        HashMap<String, Integer> frecuencias = Util.calcularFrecuencias(textFile);
+        Map<String, Integer> frecuencias = Util.calcularFrecuencias(textFile);
         ArbolHuffman ah = new ArbolHuffman();
         ah.calcularArbol(frecuencias);
         String codeBinary = ArbolHuffman.codificar(textFile, ah.calcularCodigos());
@@ -51,10 +55,8 @@ public class Operaciones {
     }
 
     private static String decompressionProcess(String nameFile, String mapName) {
-        HashMap<String, String> mapa = Util.leerMapa(mapName);
-        System.out.println(mapa);
+        Map<String, String> mapa = Util.leerMapa(mapName);
         String mensajeDes = Util.hexadecimalBinario(Util.leerTexto(Constantes.RUTAFILES + nameFile));
-        System.out.println(mensajeDes);
         return ArbolHuffman.decodificar(mensajeDes, mapa);
     }
 

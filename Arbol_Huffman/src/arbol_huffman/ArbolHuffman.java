@@ -7,6 +7,7 @@ package arbol_huffman;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 
@@ -29,7 +30,7 @@ public class ArbolHuffman {
         }
     }
     
-    public void calcularArbol(HashMap<String,Integer> mapa) {
+    public void calcularArbol(Map<String,Integer> mapa) {
         PriorityQueue<Node> nodos = convertirNodos(mapa);
         Node retorno = null;
         while(!nodos.isEmpty()) {
@@ -44,7 +45,7 @@ public class ArbolHuffman {
         root = retorno;
     }
     
-    private PriorityQueue<Node> convertirNodos(HashMap<String,Integer> mapa) {
+    private PriorityQueue<Node> convertirNodos(Map<String,Integer> mapa) {
         PriorityQueue<Node> retorno = new PriorityQueue<>((Node a, Node b) -> a.frecuencia - b.frecuencia);
         Set<String> keys = mapa.keySet();
         Iterator<String> it = keys.iterator();
@@ -65,7 +66,7 @@ public class ArbolHuffman {
         return retorno;
     }
     
-    public HashMap<String,String> calcularCodigos() {
+    public Map<String,String> calcularCodigos() {
         return calcularCodigos(root, "");
     }
     
@@ -83,7 +84,7 @@ public class ArbolHuffman {
         }
     }
     
-    public static String codificar(String texto, HashMap<String,String> mapa) {
+    public static String codificar(String texto, Map<String,String> mapa) {
         StringBuilder retorno = new StringBuilder();
         String[] caracteres = texto.split("");
         for(String i : caracteres) {
@@ -92,21 +93,21 @@ public class ArbolHuffman {
         return retorno.toString();
     }
     
-    public static String decodificar(String texto, HashMap<String,String> mapa) {
+    public static String decodificar(String texto, Map<String,String> mapa) {
         StringBuilder retorno = new StringBuilder();
-        String tmp = "";
+        StringBuilder tmp = new StringBuilder();
         String[] codigos = texto.split("");
         Set<String> llaves = mapa.keySet();
         
         for(String i : codigos) {
-            tmp = tmp + i;
-            if (mapa.containsValue(tmp)) {
+            tmp.append(i);
+            if (mapa.containsValue(tmp.toString())) {
                 Iterator<String> it = llaves.iterator();
-                while (!tmp.equals("")) {
+                while (tmp.length() != 0) {
                     String llave = it.next();
-                    if (mapa.get(llave).equals(tmp)) {
+                    if (mapa.get(llave).equals(tmp.toString())) {
                         retorno.append(llave);
-                        tmp = "";
+                        tmp = new StringBuilder();
                     }
                 }
             }

@@ -21,6 +21,11 @@ import java.util.logging.Logger;
  * @author josue
  */
 public class Util {
+    
+    private Util() {
+        
+    }
+    
     public static String leerTexto(String nombreArchivo){
         try(BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))){
             StringBuilder txt   = new StringBuilder();
@@ -36,7 +41,7 @@ public class Util {
         return null;
     }
     
-    public static HashMap<String,Integer> calcularFrecuencias(String txt){
+    public static Map<String,Integer> calcularFrecuencias(String txt){
        String[] arr = txt.split("");
        HashMap<String,Integer> hm = new HashMap<>();
        for(String letra : arr){
@@ -54,7 +59,7 @@ public class Util {
     public static String binarioHexadecimal(String binario){
         int count = 0;
         while(binario.length() % 4 > 0){
-            binario = binario + "0";
+            binario += "0";
             count++;
         }
         
@@ -99,7 +104,7 @@ public class Util {
         return decimal;
     }
     
-    public static void guardarTexto (String nombreArchivo, String texto, HashMap<String,String> mapa){
+    public static void guardarTexto (String nombreArchivo, String texto, Map<String,String> mapa){
         if (nombreArchivo != null && texto != null && mapa != null) { 
             try(BufferedWriter writerText = new BufferedWriter(new FileWriter(Constantes.RUTAFILES + nombreArchivo));
                 BufferedWriter writerCompress = new BufferedWriter(new FileWriter(Constantes.RUTAFILES + nombreArchivo.replaceFirst(".txt", "") + "_compress.txt"))){
@@ -115,7 +120,7 @@ public class Util {
         }
     }
     
-    public static HashMap<String,String> leerMapa (String nombreArchivo){
+    public static Map<String,String> leerMapa (String nombreArchivo){
         HashMap<String,String> codes = new HashMap<>();
         try(BufferedReader br = new BufferedReader(new FileReader(Constantes.RUTAFILES + nombreArchivo))){
             String line = br.readLine();

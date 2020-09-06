@@ -10,6 +10,11 @@ package ec.edu.espol.constants;
  * @author TBeltran
  */
 public class Constantes {
+    
+    private Constantes(){
+        
+    }
+    
     public static final String RUTAFILES = "./src/ec/edu/espol/files/";
     public static final String RUTASTYLE = "/ec/edu/espol/files/StyleSheet.css";
 }
